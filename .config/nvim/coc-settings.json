@@ -1,0 +1,27 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "json",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+  // Python
+  "python.pythonPath": "~/.config/nvim/python_path.sh",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
+  "python.sortImports.path": "isort",
+  //"pyright.disableDiagnostics": true,
+  //"python.linting.flake8Enabled": true,
+  // "python.linting.mypyEnabled": true,
+  // "python.analysis.diagnosticMode": "workspace",
+  // Jinja
+  "htmldjango.djlint.indent": 2,
+  "htmldjango.djhtml.tabWidth": 2,
+  // Js Ts (Eslint, Prettier)
+  "eslint.format.enable": true,
+  "prettier.enable": false
+  // "prettier.formatterPriority": 0
+}
