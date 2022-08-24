@@ -19,6 +19,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'windwp/nvim-autopairs'
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'tpope/vim-dotenv'
+Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'yuezk/vim-js'
@@ -61,12 +62,6 @@ inoremap ? ?<c-g>u
 
 " Visual mode, delete to black hole register first
 xnoremap p "_dP
-
-" Autocommands / Folds
-set foldlevel=99
-autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
-autocmd BufRead,BufNewFile Jenkinsfile setlocal filetype=groovy
-
 
 " Exit terminal
 tnoremap <C-[> <C-\><C-n>
@@ -204,6 +199,36 @@ require('nvim-autopairs').setup(
 )
 EOF
 
+" Nvim Tree Sitter
+lua << EOF
+require('nvim-treesitter.configs').setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "python", "javascript", "typescript", "html", "markdown", "json" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { },
+
+  highlight = {
+    enable = true,
+    disable = { "yaml" },
+    additional_vim_regex_highlighting = false,
+  },
+
+  indent = {
+    enable = true
+  }
+}
+EOF
+set foldlevel=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 " Quickfix List
 nnoremap <space>co <cmd>copen<cr>
 nnoremap <space>cc <cmd>cclose<cr>
@@ -215,7 +240,7 @@ set tabstop     =4
 set softtabstop =4
 set shiftwidth  =4
 set expandtab
-autocmd BufEnter *.htm,*.html,*.tsx,*.ts,*.js,*.jsx,*.json setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufEnter *.htm,*.html,*.tsx,*.ts,*.js,*.jsx,*.json,*.vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Buffers
 nnoremap <space>q <cmd>bd<cr>
@@ -245,6 +270,7 @@ set ignorecase
 set smartcase
 set splitright
 noremap <CR> :noh<CR><CR>
+autocmd BufRead,BufNewFile Jenkinsfile setlocal filetype=groovy
 
 " Color Theme (xterm 256 colors)
 let g:nord_uniform_diff_background = 1
