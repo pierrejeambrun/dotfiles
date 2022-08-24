@@ -1,0 +1,78 @@
+" Plugins
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+
+" Keep cursor centered
+nnoremap n nzzzv
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Move around tabs
+" nnoremap <S-j> gT
+" nnoremap <S-k> gt
+nnoremap [b gT
+nnoremap ]b gt
+nnoremap <space>q :action CloseContent<CR>
+
+" Visual mode, delete to black hole register first
+xnoremap p "_dP
+
+" ACTIONS
+" *********************
+:map <leader>n <Action>(SelectInProjectView)
+:map <C-s> <Action>(SaveAll)
+" Git
+:map [c <Action>(VcsShowPrevChangeMarker)
+:map ]c <Action>(VcsShowNextChangeMarker)
+:map <space>hu <Action>(Vcs.RollbackChangedLines)
+:map <space>hp <Action>(VcsShowCurrentChangeMarker)
+" Navigation
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+vnoremap J :action MoveLineDown<CR>gv
+vnoremap K :action MoveLineUp<CR>gv
+nnoremap g; :action JumpToLastChange<CR>
+nnoremap g, :action JumpToNextChange<CR>
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+:map [e <Action>(GotoPreviousError)
+:map ]e <Action>(GotoNextError)
+" Telescope Equivalent
+nnoremap <space>ff :action GotoFile<CR>
+nnoremap <space>fc :action GotoClass<CR>
+nnoremap <space>fg :action FindInPath<CR>
+nnoremap <space>fb :action RecentFiles<CR>
+nnoremap <space>fa :action GotoAction<CR>
+"Debug
+nnoremap <space>df :action RerunFailedTests<CR>
+nnoremap <space>db :action ToggleLineBreakpoint<CR>
+" Display
+:map <C-w><C-o> <Action>(HideAllWindows)
+nnoremap <space>vf :action ToggleFullScreen<CR>
+nnoremap <space>vd :action ToggleDistractionFreeMode<CR>
+" *********************
+
+" Misc
+set relativenumber
+set clipboard+=unnamedplus
+set clipboard+=ideaput
+set showmode
+set highlightedyank
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+let g:highlightedyank_highlight_duration = "100"
+nnoremap Y y$
+set hls
+
+" Useful links
+" https://github.com/JetBrains/intellij-community/blob/master/platform/platform-resources/src/idea/PlatformActions.xml
+" https://github.com/JetBrains/ideavim#executing-actions
+" https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
