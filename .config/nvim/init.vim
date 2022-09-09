@@ -144,7 +144,7 @@ nnoremap <A-1> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFind<cr>
 
 " Coc
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-htmldjango', 'coc-snippets']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-htmldjango', 'coc-snippets']
 let g:python3_host_prog = '~/.virtualenvs/nvim/bin/python'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -160,6 +160,9 @@ nmap <leader>a <cmd>CocFix<cr>
 nmap <leader>fc  <Plug>(coc-fix-current)
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>tf :CocCommand pyright.fileTest<CR>
+nmap <leader>ts :CocCommand pyright.singleTest<CR>
+
 " Apply AutoFix to problem on the current line.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -287,3 +290,4 @@ augroup RestoreCursorShapeOnExit
     autocmd!
     autocmd VimLeave * set guicursor=a:hor20
 augroup END
+

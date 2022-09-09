@@ -9,19 +9,23 @@
     "html"
   ],
   // Python
+  "suggest.noselect": true,
   "python.pythonPath": "~/.config/nvim/python_path.sh",
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.local/bin/black",
+  "pyright.inlayHints.enable": false,
+  "pyright.testing.provider": "pytest",
+  // "python.formatting.blackPath": "~/.local/bin/black",
   "python.sortImports.path": "isort",
-  //"pyright.disableDiagnostics": true,
-  //"python.linting.flake8Enabled": true,
-  // "python.linting.mypyEnabled": true,
-  // "python.analysis.diagnosticMode": "workspace",
+  "pyright.disableDiagnostics": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.analysis.diagnosticMode": "workspace",
   // Jinja
   "htmldjango.djlint.indent": 2,
   "htmldjango.djhtml.tabWidth": 2,
   // Js Ts (Eslint, Prettier)
   "eslint.format.enable": true,
-  "prettier.enable": false
-  // "prettier.formatterPriority": 0
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "prettier.formatterPriority": 0
 }
