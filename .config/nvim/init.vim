@@ -187,8 +187,8 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>j  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-autocmd BufWritePost *.py :CocCommand python.sortImports
-au BufWrite *.py silent call CocAction('format') " Only if black timeout with 500ms
+autocmd BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" au BufWrite *.py silent call CocAction('format') " Only if black timeout with 500ms
 
 " Fugitive
 nnoremap <space>fh <cmd>Gclog %<cr>
