@@ -144,7 +144,7 @@ nnoremap <A-1> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFind<cr>
 
 " Coc
-let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-htmldjango', 'coc-snippets']
+let g:coc_global_extensions = ['coc-css', 'coc-htmldjango', 'coc-html', 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-snippets', 'coc-vimlsp']
 let g:python3_host_prog = '~/.virtualenvs/nvim/bin/python'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -219,7 +219,7 @@ require('nvim-treesitter.configs').setup {
 
   highlight = {
     enable = true,
-    disable = { "yaml" },
+    disable = { "yaml", "sql" },
     additional_vim_regex_highlighting = false,
   },
 

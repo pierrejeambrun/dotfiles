@@ -8,8 +8,8 @@
     "typescriptreact",
     "html"
   ],
-  // Python
   "suggest.noselect": true,
+  // Python
   "python.pythonPath": "~/.config/nvim/python_path.sh",
   "python.formatting.provider": "black",
   "pyright.inlayHints.enable": false,
