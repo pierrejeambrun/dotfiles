@@ -11,7 +11,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Plug 'github/copilot.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'honza/vim-snippets'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -20,6 +19,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'tpope/vim-dotenv'
 Plug 'nvim-treesitter/nvim-treesitter'
+
+" Plug 'github/copilot.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'yuezk/vim-js'
@@ -29,10 +30,12 @@ call plug#end()
 " Ignore files
 set wildignore+=*.pyc
 set wildignore+=*_build/*
+set wildignore+=*build/*
 set wildignore+=**/coverage/*
 set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
+set wildignore+=**/__pycache__/*
 
 " Highlight Yanked text
 augroup highlight_yank
@@ -144,7 +147,7 @@ nnoremap <A-1> :NERDTreeToggle<CR>
 nnoremap <leader>n :NERDTreeFind<cr>
 
 " Coc
-let g:coc_global_extensions = ['coc-css', 'coc-htmldjango', 'coc-html', 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-snippets', 'coc-vimlsp']
+let g:coc_global_extensions = ['coc-css', 'coc-htmldjango', 'coc-html', 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-snippets', 'coc-vimlsp', 'coc-spell-checker']
 let g:python3_host_prog = '~/.virtualenvs/nvim/bin/python'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -162,6 +165,8 @@ xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>tf :CocCommand pyright.fileTest<CR>
 nmap <leader>ts :CocCommand pyright.singleTest<CR>
+nnoremap zg :CocCommand cSpell.addWordToUserDictionary<CR>
+nnoremap zw :CocCommand cSpell.removeWordFromUserDictionary<CR>
 
 " Apply AutoFix to problem on the current line.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -187,8 +192,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>j  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-autocmd BufWritePre *.py :silent call CocAction('runCommand', 'python.sortImports')
-" au BufWrite *.py silent call CocAction('format') " Only if black timeout with 500ms
+autocmd BufWrite *.py :silent call CocAction('runCommand', 'python.sortImports')
+au BufWrite *.py silent call CocAction('format') " Black is too long, no autoformat with COC
+au BufWrite *.tsx,*.ts,*.js,*.jsx :CocCommand eslint.executeAutofix
 
 " Fugitive
 nnoremap <space>fh <cmd>Gclog %<cr>
@@ -219,7 +225,7 @@ require('nvim-treesitter.configs').setup {
 
   highlight = {
     enable = true,
-    disable = { "yaml", "sql" },
+    disable = { "yaml", "sql", "markdown" },
     additional_vim_regex_highlighting = false,
   },
 
@@ -262,6 +268,7 @@ let g:airline_theme = 'nord'
 set noshowmode
 
 " Misc
+set wrap!
 set history=500
 set relativenumber
 set number
@@ -283,6 +290,7 @@ highlight LineNr ctermfg=222 cterm=italic
 highlight Visual ctermbg=222 ctermfg=Black
 set cursorline
 highlight CocFadeOut  ctermfg=243 cterm=underline
+hi link markdownError NONE
 
 " Cursors
 set guicursor=i:hor20

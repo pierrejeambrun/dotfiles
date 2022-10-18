@@ -1,11 +1,10 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
-    "python",
     "json",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
+    // "javascript",
+    // "javascriptreact",
+    // "typescript",
+    // "typescriptreact",
     "html"
   ],
   "suggest.noselect": true,
@@ -14,7 +13,6 @@
   "python.formatting.provider": "black",
   "pyright.inlayHints.enable": false,
   "pyright.testing.provider": "pytest",
-  // "python.formatting.blackPath": "~/.local/bin/black",
   "python.sortImports.path": "isort",
   "pyright.disableDiagnostics": true,
   "python.linting.flake8Enabled": true,
@@ -27,5 +25,18 @@
   "eslint.format.enable": true,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "prettier.formatterPriority": 0
+  // "prettier.formatterPriority": -1
+  "prettier.enable": false,
+  "cSpell.userWords": [
+    "djhtml",
+    "djlint",
+    "enabled",
+    "htmldjango",
+    "isort",
+    "mypy",
+    "noselect",
+    "nvim",
+    "pyright",
+    "pytest"
+  ]
 }
