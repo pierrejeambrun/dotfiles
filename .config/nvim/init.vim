@@ -3,7 +3,7 @@ call plug#begin('~/.config/nvim')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'AckslD/nvim-neoclip.lua'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
@@ -19,6 +19,11 @@ Plug 'windwp/nvim-autopairs'
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'tpope/vim-dotenv'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
+" ChatGPT
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jackMort/ChatGPT.nvim'
+
 
 " Plug 'github/copilot.vim'
 " Plug 'sheerun/vim-polyglot'
@@ -192,7 +197,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>j  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-autocmd BufWrite *.py :silent call CocAction('runCommand', 'python.sortImports')
+" Auto format/import sort/autofix on save.
+" autocmd BufWrite *.py :silent call CocAction('runCommand', 'python.sortImports') " Not needed when ruff is installed
+au BufWrite *.py :CocCommand ruff.executeAutofix " Ruff autofix (isort + type etc)
 au BufWrite *.py silent call CocAction('format') " Black is too long, no autoformat with COC
 au BufWrite *.tsx,*.ts,*.js,*.jsx :CocCommand eslint.executeAutofix
 
@@ -212,20 +219,20 @@ EOF
 lua << EOF
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "python", "javascript", "typescript", "html", "markdown", "json" },
+  ensure_installed = "all",
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
-  auto_install = true,
+  auto_install = false,
 
   -- List of parsers to ignore installing (for "all")
   ignore_install = { },
 
   highlight = {
     enable = true,
-    disable = { "yaml", "sql", "markdown" },
+    disable = { "yaml", "sql", "markdown", "diff" },
     additional_vim_regex_highlighting = false,
   },
 
@@ -234,6 +241,19 @@ require('nvim-treesitter.configs').setup {
   }
 }
 EOF
+
+" Nvim ChatGPT
+nnoremap <space>gpt <cmd>ChatGPT<cr>
+lua << EOF
+require('chatgpt').setup(
+  {
+      keymaps = {
+        submit = "<C-a>",
+      }
+  }
+)
+EOF
+
 set foldlevel=99
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
