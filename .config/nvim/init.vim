@@ -120,7 +120,7 @@ require'telescope'.setup {
                 '--column',
                 '--smart-case',
                 '--hidden',
---              '--no-ignore',
+                '--no-ignore',
         },
         file_ignore_patterns = {
                 '*.pyc',
