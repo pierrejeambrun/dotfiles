@@ -22,7 +22,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
 " ChatGPT
 Plug 'MunifTanjim/nui.nvim'
-Plug 'jackMort/ChatGPT.nvim'
+" Plug 'jackMort/ChatGPT.nvim'
 
 
 " Plug 'github/copilot.vim'
@@ -243,16 +243,16 @@ require('nvim-treesitter.configs').setup {
 EOF
 
 " Nvim ChatGPT
-nnoremap <space>gpt <cmd>ChatGPT<cr>
-lua << EOF
-require('chatgpt').setup(
-  {
-      keymaps = {
-        submit = "<C-a>",
-      }
-  }
-)
-EOF
+" nnoremap <space>gpt <cmd>ChatGPT<cr>
+" lua << EOF
+" require('chatgpt').setup(
+"   {
+"       keymaps = {
+"         submit = "<C-a>",
+"       }
+"   }
+" )
+" EOF
 
 set foldlevel=99
 set foldmethod=expr
@@ -311,6 +311,8 @@ highlight Visual ctermbg=222 ctermfg=Black
 set cursorline
 highlight CocFadeOut  ctermfg=243 cterm=underline
 hi link markdownError NONE
+" Seems useful on MacOS, otherwise the floating window appears with really weird colors
+" highlight CocFloating ctermbg=Blue
 
 " Cursors
 set guicursor=i:hor20
