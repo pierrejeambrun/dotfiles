@@ -23,9 +23,7 @@ Plug 'yaegassy/coc-ruff', {'do': 'yarn install --frozen-lockfile'}
 " ChatGPT
 Plug 'MunifTanjim/nui.nvim'
 " Plug 'jackMort/ChatGPT.nvim'
-
-
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'yuezk/vim-js'
@@ -200,8 +198,12 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Auto format/import sort/autofix on save.
 " autocmd BufWrite *.py :silent call CocAction('runCommand', 'python.sortImports') " Not needed when ruff is installed
 au BufWrite *.py :CocCommand ruff.executeAutofix " Ruff autofix (isort + type etc)
-au BufWrite *.py silent call CocAction('format') " Black is too long, no autoformat with COC
+" au BufWrite *.py silent call CocAction('format') " If using black formatter for python Black is too long, no autoformat with COC (remove in coc-seetings.json python files autoformat)
 au BufWrite *.tsx,*.ts,*.js,*.jsx :CocCommand eslint.executeAutofix
+au BufWritePost *.tsx,*.ts,*.js,*.jsx !prettier --write %
+" nnoremap <leader>pf <cmd>silent !prettier --write %<cr>
+
+
 
 " Fugitive
 nnoremap <space>fh <cmd>Gclog %<cr>
@@ -278,9 +280,9 @@ nnoremap <space>q <cmd>bd<cr>
 let g:gitgutter_preview_win_floating = 0
 nnoremap <space>hu <cmd>GitGutterUndoHunk <cr>
 nnoremap <space>hp <cmd>GitGutterPreviewHunk <cr>
-highlight GitGutterAdd guifg=#009900 ctermfg=Green
-highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
-highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+hi GitGutterAdd guifg=#009900 ctermfg=Green
+hi GitGutterChange guifg=#bbbb00 ctermfg=Yellow
+hi GitGutterDelete guifg=#ff2222 ctermfg=Red
 
 " Vim airline
 " let g:airline#extensions#tabline#enabled = 1
@@ -303,16 +305,17 @@ noremap <CR> :noh<CR><CR>
 autocmd BufRead,BufNewFile Jenkinsfile setlocal filetype=groovy
 
 " Color Theme (xterm 256 colors)
-let g:nord_uniform_diff_background = 1
+set termguicolors
 colorscheme nord
-highlight Comment ctermfg=DarkGreen
-highlight LineNr ctermfg=222 cterm=italic
-highlight Visual ctermbg=222 ctermfg=Black
+let g:nord_uniform_diff_background = 1
+hi Comment ctermfg=DarkGreen
+hi LineNr ctermfg=yellow cterm=italic
+hi Visual ctermfg=222 ctermfg=Black
 set cursorline
-highlight CocFadeOut  ctermfg=243 cterm=underline
+hi CocFadeOut  ctermfg=243 cterm=underline
 hi link markdownError NONE
-" Seems useful on MacOS, otherwise the floating window appears with really weird colors
-" highlight CocFloating ctermbg=Blue
+" Seems useful on MacOS, otherwise it appears really ugly the color does not matter, it will go 'transparant'
+highlight CocFloating ctermbg=Blue
 
 " Cursors
 set guicursor=i:hor20
